@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Y. N. AHMED</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&family=Poppins:wght@700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="internal-page scrollable">
+<body class="internal-page">
     <div id="particles-js"></div>
     <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+
     <header id="main-header">
         <div class="header-container">
-            <a href="index.html" class="header-logo"><img src="images/ma-photo1.png" alt="Logo"><span>Y. N. AHMED</span></a>
+            <a href="index.html" class="header-logo"><img src="images/ma-photo1.png" alt="Logo Y. N. AHMED"><span>Y. N. AHMED</span></a>
             <nav class="main-nav">
                 <a href="apropos.html">À Propos</a>
                 <a href="competences.html">Compétences</a>
@@ -26,57 +27,43 @@
             <div class="hamburger-menu" id="hamburger-menu"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></div>
         </div>
     </header>
+
     <div class="mobile-nav" id="mobile-nav">
         <a href="apropos.html">À Propos</a>
         <a href="competences.html">Compétences</a>
         <a href="projets.html">Projets</a>
         <a href="contact.html" class="active">Contact</a>
     </div>
-    <div id="main-content">
+
+    <main id="main-content">
         <section id="contact" class="section-container">
             <h2 class="section-title" data-aos="fade-up">05. Entrons en contact</h2>
             <div class="contact-content">
                 <div class="contact-text" data-aos="fade-right">
                     <h3>Discutons de votre prochain projet.</h3>
-                    <p>Je suis actuellement à la recherche de nouvelles opportunités et mon inbox est toujours ouverte. Que vous ayez une question, une proposition de projet, ou que vous souhaitiez simplement dire bonjour, je ferai de mon mieux pour vous répondre !</p>
+                    <p>Je suis actuellement à la recherche de nouvelles opportunités et ma boîte de réception est toujours ouverte. Que vous ayez une question, une proposition de projet, ou que vous souhaitiez simplement dire bonjour, je ferai de mon mieux pour vous répondre !</p>
                 </div>
                 <div class="contact-details" data-aos="fade-left" data-aos-delay="200">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Localisation</h4>
-                            <span>Douala, Cameroun (Bonaberi)</span>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <a href="mailto:ngapnaahmed7823@gmail.com">ngapnaahmed7823@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <div>
-                            <h4>Téléphone</h4>
-                            <a href="tel:+237659567319">+237 659 567 319</a>
-                        </div>
-                    </div>
+                    <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h4>Localisation</h4><span>Douala, Cameroun (Bonaberi)</span></div></div>
+                    <div class="contact-item"><i class="fas fa-envelope"></i><div><h4>Email</h4><a href="mailto:ngapnaahmed7823@gmail.com">ngapnaahmed7823@gmail.com</a></div></div>
+                    <div class="contact-item"><i class="fas fa-phone-alt"></i><div><h4>Téléphone</h4><a href="tel:+237659567319">+237 659 567 319</a></div></div>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
+
     <footer id="main-footer">
         <div class="footer-content">
             <p class="copyright">© 2025 YIAGNIGNI NGAPNA AHMED</p>
             <div class="social-links">
-                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
             </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
@@ -86,7 +73,7 @@
         function closeMenu() { hamburger.classList.remove('open'); mobileNav.classList.remove('open'); overlay.classList.remove('open'); }
         hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); overlay.classList.toggle('open'); });
         overlay.addEventListener('click', closeMenu);
-        mobileNav.addEventListener('click', closeMenu);
+        mobileNav.addEventListener('click', (e) => { if (e.target.tagName === 'A') { closeMenu(); } });
     </script>
 </body>
 </html>

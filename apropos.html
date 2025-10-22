@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À Propos - Y. N. AHMED</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&family=Poppins:wght@700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="internal-page scrollable">
+<body class="internal-page">
     <div id="particles-js"></div>
     <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
     <div id="pdf-viewer-overlay"><button id="pdf-close-button">&times;</button><div id="pdf-content"></div></div>
+
     <header id="main-header">
         <div class="header-container">
-            <a href="index.html" class="header-logo"><img src="images/ma-photo1.png" alt="Logo"><span>Y. N. AHMED</span></a>
+            <a href="index.html" class="header-logo"><img src="images/ma-photo1.png" alt="Logo Y. N. AHMED"><span>Y. N. AHMED</span></a>
             <nav class="main-nav">
                 <a href="apropos.html" class="active">À Propos</a>
                 <a href="competences.html">Compétences</a>
@@ -27,90 +28,53 @@
             <div class="hamburger-menu" id="hamburger-menu"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></div>
         </div>
     </header>
+
     <div class="mobile-nav" id="mobile-nav">
         <a href="apropos.html" class="active">À Propos</a>
         <a href="competences.html">Compétences</a>
         <a href="projets.html">Projets</a>
         <a href="contact.html">Contact</a>
     </div>
-    <div id="main-content">
+
+    <main id="main-content">
         <section id="a-propos" class="section-container">
             <h2 class="section-title" data-aos="fade-up">01. Mon Parcours</h2>
-            <div class="about-content" data-aos="fade-up" data-aos-delay="100">
-                <div class="about-text">
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
                     <p>Passionné par la résolution de problèmes complexes, mon parcours est une quête continue pour transformer les idées en solutions technologiques percutantes. L'Intelligence Artificielle s'est imposée à moi comme le domaine ultime où la logique, la créativité et l'impact se rencontrent.</p>
-                    <p>Mon approche est simple : comprendre en profondeur le besoin, explorer les données pour en extraire l'essence, et construire des modèles qui non seulement fonctionnent, mais qui sont aussi interprétables et robustes. Chaque projet est une nouvelle aventure intellectuelle.</p>
+                    <p>Mon approche est simple : comprendre en profondeur le besoin, explorer les données pour en extraire l'essence, et construire des modèles qui non seulement fonctionnent, mais qui sont aussi interprétables et robustes. Chaque projet est une nouvelle aventure intellectuelle, un puzzle à résoudre où les données sont les pièces et l'algorithme est la clé.</p>
                 </div>
-                <div class="about-photo">
+                <div class="about-photo" data-aos="fade-left" data-aos-delay="100">
                     <div class="hexagon-photo"><img src="images/ma-photo.png" alt="Photo de Ahmed Yiagnigni"></div>
                 </div>
             </div>
         </section>
+
         <section id="documents" class="section-container">
             <h2 class="section-title" data-aos="fade-up">02. Documents Clés</h2>
             <div class="documents-grid">
-                <div class="doc-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-file-alt doc-icon"></i><h3>Curriculum Vitae</h3>
-                    <p>Synthèse de mon parcours, compétences et expériences.</p>
-                    <div class="doc-buttons">
-                        <a href="documents/CV.pdf" class="doc-btn" download>Télécharger</a>
-                        <button class="doc-btn view-btn" data-pdf="documents/CV.pdf">Visualiser</button>
-                    </div>
-                </div>
-                <div class="doc-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-graduation-cap doc-icon"></i><h3>Relevé Bachelor 1</h3>
-                    <p>Résultats de première année, posant les fondations de mon savoir.</p>
-                    <div class="doc-buttons">
-                        <a href="documents/Note_Bachelor1.pdf" class="doc-btn" download>Télécharger</a>
-                        <button class="doc-btn view-btn" data-pdf="documents/Note_Bachelor1.pdf">Visualiser</button>
-                    </div>
-                </div>
-                <div class="doc-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-graduation-cap doc-icon"></i><h3>Relevé Bachelor 2</h3>
-                    <p>Spécialisation dans les algorithmes et structures de données.</p>
-                    <div class="doc-buttons">
-                        <a href="documents/Note_Bachelor2.pdf" class="doc-btn" download>Télécharger</a>
-                        <button class="doc-btn view-btn" data-pdf="documents/Note_Bachelor2.pdf">Visualiser</button>
-                    </div>
-                </div>
-                <div class="doc-card" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-graduation-cap doc-icon"></i><h3>Relevé Bachelor 3</h3>
-                    <p>Application des concepts d'IA sur des projets concrets.</p>
-                    <div class="doc-buttons">
-                        <a href="documents/relevé de notes annuel.pdf" class="doc-btn" download>Télécharger</a>
-                        <button class="doc-btn view-btn" data-pdf="documents/relevé de notes annuel.pdf">Visualiser</button>
-                    </div>
-                </div>
-                <div class="doc-card" data-aos="fade-up" data-aos-delay="500">
-                    <i class="fas fa-award doc-icon"></i><h3>Attestation de Réussite</h3>
-                    <p>Certification officielle de l'obtention de mon diplôme.</p>
-                    <div class="doc-buttons">
-                        <a href="documents/attestation de réussite.pdf" class="doc-btn" download>Télécharger</a>
-                        <button class="doc-btn view-btn" data-pdf="documents/attestation de réussite.pdf">Visualiser</button>
-                    </div>
-                </div>
-                <div class="doc-card" data-aos="fade-up" data-aos-delay="600">
-                    <i class="fas fa-stamp doc-icon"></i><h3>Certificat de Scolarité</h3>
-                    <p>Justificatif officiel de mon statut d'étudiant pour l'année en cours.</p>
-                    <div class="doc-buttons">
-                        <a href="documents/certificat_scolarite.pdf" class="doc-btn" download>Télécharger</a>
-                        <button class="doc-btn view-btn" data-pdf="documents/certificat_scolarite.pdf">Visualiser</button>
-                    </div>
-                </div>
+                <div class="doc-card" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-file-alt doc-icon"></i><h3>Curriculum Vitae</h3><p>Synthèse de mon parcours, compétences et expériences.</p><div class="doc-buttons"><a href="documents/CV.pdf" class="doc-btn" download>Télécharger</a><button class="doc-btn view-btn" data-pdf="documents/CV.pdf">Visualiser</button></div></div>
+                <div class="doc-card" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-graduation-cap doc-icon"></i><h3>Relevé Bachelor 1</h3><p>Résultats de première année, posant les fondations de mon savoir.</p><div class="doc-buttons"><a href="documents/Note_Bachelor1.pdf" class="doc-btn" download>Télécharger</a><button class="doc-btn view-btn" data-pdf="documents/Note_Bachelor1.pdf">Visualiser</button></div></div>
+                <div class="doc-card" data-aos="fade-up" data-aos-delay="300"><i class="fas fa-graduation-cap doc-icon"></i><h3>Relevé Bachelor 2</h3><p>Spécialisation dans les algorithmes et structures de données.</p><div class="doc-buttons"><a href="documents/Note_Bachelor2.pdf" class="doc-btn" download>Télécharger</a><button class="doc-btn view-btn" data-pdf="documents/Note_Bachelor2.pdf">Visualiser</button></div></div>
+                <div class="doc-card" data-aos="fade-up" data-aos-delay="400"><i class="fas fa-graduation-cap doc-icon"></i><h3>Relevé Bachelor 3</h3><p>Application des concepts d'IA sur des projets concrets.</p><div class="doc-buttons"><a href="documents/relevé de notes annuel.pdf" class="doc-btn" download>Télécharger</a><button class="doc-btn view-btn" data-pdf="documents/relevé de notes annuel.pdf">Visualiser</button></div></div>
+                <div class="doc-card" data-aos="fade-up" data-aos-delay="500"><i class="fas fa-award doc-icon"></i><h3>Attestation de Réussite</h3><p>Certification officielle de l'obtention de mon diplôme.</p><div class="doc-buttons"><a href="documents/attestation de réussite.pdf" class="doc-btn" download>Télécharger</a><button class="doc-btn view-btn" data-pdf="documents/attestation de réussite.pdf">Visualiser</button></div></div>
+                <div class="doc-card" data-aos="fade-up" data-aos-delay="600"><i class="fas fa-stamp doc-icon"></i><h3>Certificat de Scolarité</h3><p>Justificatif officiel de mon statut d'étudiant pour l'année en cours.</p><div class="doc-buttons"><a href="documents/Certificat scolarité.pdf" class="doc-btn" download>Télécharger</a><button class="doc-btn view-btn" data-pdf="documents/Certificat scolarité.pdf">Visualiser</button></div></div>
             </div>
         </section>
-    </div>
+    </main>
+
     <footer id="main-footer">
         <div class="footer-content">
             <p class="copyright">© 2025 YIAGNIGNI NGAPNA AHMED</p>
             <div class="social-links">
-                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
             </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
@@ -120,7 +84,7 @@
         function closeMenu() { hamburger.classList.remove('open'); mobileNav.classList.remove('open'); overlay.classList.remove('open'); }
         hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); overlay.classList.toggle('open'); });
         overlay.addEventListener('click', closeMenu);
-        mobileNav.addEventListener('click', closeMenu);
+        mobileNav.addEventListener('click', (e) => { if (e.target.tagName === 'A') { closeMenu(); } });
         const viewButtons = document.querySelectorAll('.view-btn'), pdfOverlay = document.getElementById('pdf-viewer-overlay'), pdfContent = document.getElementById('pdf-content'), closeButton = document.getElementById('pdf-close-button');
         function openPdfViewer(filePath) { pdfContent.innerHTML = `<embed src="${filePath}" type="application/pdf" width="100%" height="100%"/>`; pdfOverlay.classList.add('open'); }
         function closePdfViewer() { pdfOverlay.classList.remove('open'); pdfContent.innerHTML = ''; }
