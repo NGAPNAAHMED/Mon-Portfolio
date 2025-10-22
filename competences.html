@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétences - Y. N. AHMED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&family=Poppins:wght@700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="internal-page scrollable">
+    <div id="particles-js"></div>
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <header id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/ma-photo.png" alt="Logo"><span>Y. N. AHMED</span></a>
+            <nav class="main-nav">
+                <a href="apropos.html">À Propos</a>
+                <a href="competences.html" class="active">Compétences</a>
+                <a href="projets.html">Projets</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="hamburger-menu" id="hamburger-menu"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></div>
+        </div>
+    </header>
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="apropos.html">À Propos</a>
+        <a href="competences.html" class="active">Compétences</a>
+        <a href="projets.html">Projets</a>
+        <a href="contact.html">Contact</a>
+    </div>
+    <div id="main-content" class="skills-page-layout">
+        <div class="skills-selector">
+            <h2 class="section-title">03. Compétences</h2>
+            <ul>
+                <li class="active" data-category="langages">Langages</li>
+                <li data-category="frameworks">Frameworks & Librairies</li>
+                <li data-category="outils">Outils & Plateformes</li>
+            </ul>
+            <p class="selector-instruction">Sélectionnez une catégorie, puis cliquez sur une technologie pour voir les détails.</p>
+        </div>
+        <div class="skills-display"></div>
+    </div>
+    <footer id="main-footer">
+        <div class="footer-content">
+            <p class="copyright">© 2025 YIAGNIGNI NGAPNA AHMED</p>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', { particles: { number: { value: 50, density: { enable: true, value_area: 800 } }, color: { value: '#64FFDA' }, shape: { type: 'circle' }, opacity: { value: 0.2, random: true }, size: { value: 2, random: true }, line_linked: { enable: true, distance: 150, color: '#64FFDA', opacity: 0.1, width: 1 }, move: { enable: true, speed: 0.5, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false } }, interactivity: { detect_on: 'canvas', events: { onhover: { enable: false }, onclick: { enable: false }, resize: true } }, retina_detect: true });
+        const hamburger = document.getElementById('hamburger-menu'), mobileNav = document.getElementById('mobile-nav'), overlay = document.getElementById('mobile-nav-overlay');
+        function closeMenu() { hamburger.classList.remove('open'); mobileNav.classList.remove('open'); overlay.classList.remove('open'); }
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); overlay.classList.toggle('open'); });
+        overlay.addEventListener('click', closeMenu);
+        mobileNav.addEventListener('click', closeMenu);
+        const skillsData = {
+            langages: [{ name: 'Python', level: 90, desc: 'Mon langage de prédilection...' },{ name: 'JavaScript', level: 75, desc: 'Utilisé pour donner vie aux données...' },{ name: 'SQL', level: 80, desc: 'Maîtrise des requêtes complexes...' }],
+            frameworks: [{ name: 'TensorFlow', level: 85, desc: 'Expérience approfondie pour construire...' },{ name: 'PyTorch', level: 80, desc: 'Mon outil de choix pour le prototypage...' },{ name: 'Scikit-learn', level: 95, desc: 'Maîtrise complète des algorithmes...' },],
+            outils: [{ name: 'Git & GitHub', level: 90, desc: 'Application quotidienne des principes de Git Flow...' },{ name: 'Docker', level: 70, desc: 'Utilisé pour encapsuler des environnements...' },]
+        };
+        const selectorItems = document.querySelectorAll('.skills-selector li'), displayPanel = document.querySelector('.skills-display');
+        function displaySkills(category) { displayPanel.innerHTML = ''; const skills = skillsData[category]; skills.forEach((skill, index) => { const skillNode = document.createElement('div'); skillNode.className = 'skill-node'; skillNode.style.animationDelay = `${index * 100}ms`; skillNode.innerHTML = `<span>${skill.name}</span>`; skillNode.addEventListener('click', () => displaySkillDetail(skill)); displayPanel.appendChild(skillNode); }); }
+        function displaySkillDetail(skill) { displayPanel.innerHTML = `<div class="skill-detail"><button class="back-button">&larr; Retour</button><h3>${skill.name}</h3><div class="progress-bar-container"><div class="progress-bar"><div class="progress-level" style="width: 0;"></div></div><span class="progress-percent" style="opacity: 0;">${skill.level}%</span></div><p>${skill.desc}</p></div>`; setTimeout(() => { const progressBar = document.querySelector('.progress-level'), progressPercent = document.querySelector('.progress-percent'); if(progressBar) { progressBar.style.width = `${skill.level}%`; setTimeout(() => progressPercent.style.opacity = '1', 1000); } }, 100); document.querySelector('.back-button').addEventListener('click', () => displaySkills(document.querySelector('.skills-selector li.active').dataset.category)); }
+        selectorItems.forEach(item => item.addEventListener('click', () => { selectorItems.forEach(i => i.classList.remove('active')); item.classList.add('active'); displaySkills(item.dataset.category); }));
+        displaySkills('langages');
+    </script>
+</body>
+</html>

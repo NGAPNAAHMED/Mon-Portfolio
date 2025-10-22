@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YIAGNIGNI NGAPNA AHMED // Portfolio IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&family=Poppins:wght@700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading home-page">
+    <div class="preloader-elements">
+        <div class="data-stream" id="data-stream"></div>
+        <div class="preloader-header"><h1 class="preloader-title-3d">Bienvenue sur mon Portfolio<span class="scanline"></span></h1></div>
+        <div class="preloader-footer">
+            <svg class="progress-ring" width="150" height="150"><circle class="progress-ring__bg" r="65" cx="75" cy="75"/><circle class="progress-ring__circle" r="65" cx="75" cy="75"/></svg>
+            <div class="preloader-percentage">0%</div>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <div id="particles-js"></div>
+        <main class="content-container">
+            <div class="upper-content">
+                <div class="logo-3d" id="logo-3d">YIAGNIGNI NGAPNA AHMED</div>
+                <div class="photo-frame"><img src="images/ma-photo.png" alt="Photo de Ahmed Yiagnigni"></div>
+                <h1 class="hero-title">Je suis <span id="typed-text"></span></h1>
+            </div>
+            <div class="lower-content">
+                <p class="hero-description">Un architecte en Intelligence Artificielle passionné par la transformation de données complexes en solutions innovantes et stratégiques.</p>
+                <a href="apropos.html" class="aurora-button">DÉCOUVRIR MON UNIVERS</a>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const percentageElement = document.querySelector('.preloader-percentage');
+            const dataStreamElement = document.getElementById('data-stream');
+            let percent = 0;
+            const chars = "0110100110";
+            for (let i = 0; i < 50; i++) {
+                const line = document.createElement('div');
+                for (let j = 0; j < 30; j++) { line.innerHTML += chars.charAt(Math.floor(Math.random() * chars.length)); }
+                dataStreamElement.appendChild(line);
+            }
+            const interval = setInterval(() => {
+                if (percent < 100) {
+                    percent++;
+                    percentageElement.textContent = percent + '%';
+                    dataStreamElement.style.transform = `translateY(${-100 + percent}%)`;
+                } else { clearInterval(interval); }
+            }, 45);
+            setTimeout(() => {
+                body.classList.remove('loading');
+                initializeMainContent();
+            }, 5000);
+            function initializeMainContent() {
+                particlesJS('particles-js', { particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: '#64FFDA' }, shape: { type: 'circle' }, opacity: { value: 0.4, random: true }, size: { value: 2, random: true }, line_linked: { enable: true, distance: 150, color: '#64FFDA', opacity: 0.2, width: 1 }, move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false } }, interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } } }, retina_detect: true });
+                var typed = new Typed('#typed-text', { strings: ["un Spécialiste IA.", "un Créateur de Modèles.", "un Visionnaire Data."], typeSpeed: 60, backSpeed: 30, loop: true, smartBackspace: true, startDelay: 1000 });
+                const logo = document.getElementById('logo-3d');
+                document.body.addEventListener('mousemove', (e) => { const { clientX, clientY, currentTarget } = e; const { clientWidth, clientHeight } = currentTarget; const x = (clientX / clientWidth) - 0.5; const y = (clientY / clientHeight) - 0.5; const rotateX = -y * 25; const rotateY = x * 25; logo.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(50px)`; });
+            }
+        });
+    </script>
+</body>
+</html>
