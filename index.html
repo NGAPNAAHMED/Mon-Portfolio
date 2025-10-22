@@ -22,6 +22,7 @@
         <div id="particles-js"></div>
         <main class="content-container">
             <div class="upper-content">
+                <!-- CORRECTION : Votre nom complet dans le logo 3D -->
                 <div class="logo-3d" id="logo-3d">YIAGNIGNI NGAPNA AHMED</div>
                 <div class="photo-frame"><img src="images/ma-photo.png" alt="Photo de Ahmed Yiagnigni"></div>
                 <h1 class="hero-title">Je suis <span id="typed-text"></span></h1>
@@ -60,7 +61,6 @@
             function initializeMainContent() {
                 particlesJS('particles-js', { particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: '#64FFDA' }, shape: { type: 'circle' }, opacity: { value: 0.4, random: true }, size: { value: 2, random: true }, line_linked: { enable: true, distance: 150, color: '#64FFDA', opacity: 0.2, width: 1 }, move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false } }, interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } } }, retina_detect: true });
                 var typed = new Typed('#typed-text', { strings: ["un Spécialiste IA.", "un Créateur de Modèles.", "un Visionnaire Data."], typeSpeed: 60, backSpeed: 30, loop: true, smartBackspace: true, startDelay: 1000 });
-                // Le script du logo 3D est maintenant géré par CSS, plus besoin de JS ici.
             }
         });
     </script>
