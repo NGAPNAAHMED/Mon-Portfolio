@@ -313,3 +313,47 @@ main#main-content { flex-grow: 1; }
     .skills-selector { flex-basis: auto; }
     .contact-content { flex-direction: column; }
 }
+
+
+
+/* ==========================================================================
+   11. SCROLL INDICATOR (MIS À JOUR)
+   ========================================================================== */
+.scroll-down-indicator {
+    position: fixed;
+    bottom: 90px; /* Positionné juste au-dessus du footer */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    opacity: 0.7;
+    animation: bounce 2s infinite;
+    /* MODIFIÉ : Ajout d'une transition pour la disparition/apparition */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Cache l'indicateur sur la page d'accueil qui ne scrolle pas */
+.home-page .scroll-down-indicator {
+    display: none;
+}
+
+/* NOUVEAU : Classe pour cacher l'indicateur en douceur */
+.scroll-down-indicator.hidden {
+    opacity: 0;
+    pointer-events: none; /* Empêche les clics fantômes */
+    transform: translateX(-50%) translateY(20px); /* Le fait descendre en disparaissant */
+}
+
+/* Animation de rebond pour attirer l'attention */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
