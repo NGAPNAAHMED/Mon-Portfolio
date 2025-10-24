@@ -9,6 +9,8 @@
     --dark-slate: #8892b0;
     --font-sans: 'Poppins', sans-serif;
     --font-mono: 'Roboto Mono', monospace;
+    --footer-height: 115px; /* Hauteur du footer pour le padding */
+    --footer-height-mobile: 95px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -16,8 +18,12 @@ body {
     background-color: var(--background-color); color: var(--secondary-color);
     font-family: var(--font-sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
-body.internal-page { display: flex; flex-direction: column; min-height: 100vh; }
-main#main-content { flex-grow: 1; }
+
+/* IMPORTANT : Le padding haut/bas assure que le contenu ne passe jamais SOUS le header/footer fixes */
+main#main-content {
+    padding-top: 150px;
+    padding-bottom: var(--footer-height); 
+}
 
 /* ==========================================================================
    2. PRELOADER & PARTICLES.JS
@@ -69,7 +75,8 @@ main#main-content { flex-grow: 1; }
    ========================================================================== */
 #main-header {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-    background-color: rgba(10, 25, 47, 0.85); backdrop-filter: blur(10px); padding: 15px 50px; transition: top 0.3s;
+    background-color: rgba(10, 25, 47, 0.85); backdrop-filter: blur(10px); padding: 15px 50px; 
+    transition: top 0.3s;
 }
 .header-container {
     display: flex; justify-content: space-between; align-items: center; width: 100%;
@@ -150,8 +157,9 @@ main#main-content { flex-grow: 1; }
    5. INTERNAL PAGES (Generic)
    ========================================================================== */
 .internal-page #main-content {
-    padding: 150px 20px 120px 20px;
     max-width: 1000px; margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .section-container { margin-bottom: 80px; }
 .section-title {
@@ -237,41 +245,28 @@ main#main-content { flex-grow: 1; }
 .contact-item h4 { font-size: 1.1rem; color: var(--secondary-color); margin-bottom: 5px; }
 .contact-item a, .contact-item span { color: var(--dark-slate); text-decoration: none; transition: color 0.3s ease; }
 .contact-item a:hover { color: var(--primary-color); }
-
 .construction-notice {
-    background-color: var(--light-background-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    padding: 40px;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-    box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    background-color: var(--light-background-color); border: 1px solid var(--primary-color);
+    border-radius: 5px; padding: 40px; text-align: center; max-width: 700px;
+    margin: 0 auto; box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
 }
-.construction-notice i {
-    font-size: 3rem;
-    color: var(--primary-color);
-}
-.construction-notice p {
-    color: var(--dark-slate);
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin: 0;
-}
+.construction-notice i { font-size: 3rem; color: var(--primary-color); }
+.construction-notice p { color: var(--dark-slate); font-size: 1.1rem; line-height: 1.7; margin: 0; }
 
 /* ==========================================================================
-   9. FOOTER --- SECTION CORRIGÉE ---
+   9. FOOTER
    ========================================================================== */
 #main-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     padding: 25px 50px;
     text-align: center;
     background-color: rgba(10, 25, 47, 0.85);
     backdrop-filter: blur(10px);
-    z-index: 90;
+    z-index: 100;
 }
 .footer-content { max-width: 1400px; margin: 0 auto; }
 .copyright { font-family: var(--font-mono); color: var(--dark-slate); font-size: 0.9rem; margin-bottom: 15px; }
@@ -285,8 +280,13 @@ main#main-content { flex-grow: 1; }
    10. RESPONSIVE DESIGN
    ========================================================================== */
 @media (max-width: 768px) {
+    main#main-content {
+        padding-top: 100px;
+        padding-bottom: var(--footer-height-mobile);
+        padding-left: 15px;
+        padding-right: 15px;
+    }
     #main-header { padding: 15px 20px; }
-    .internal-page #main-content { padding: 100px 15px 80px 15px; }
     #main-footer { padding: 15px 20px; }
     .copyright { margin-bottom: 10px; }
     .main-nav { display: none; }
@@ -325,129 +325,79 @@ main#main-content { flex-grow: 1; }
     .skills-page-layout { flex-direction: column; }
     .skills-selector { flex-basis: auto; }
     .contact-content { flex-direction: column; }
-    .scroll-down-indicator { bottom: 20px; }
 }
 
 /* ==========================================================================
-   11. SCROLL INDICATOR --- SECTION CORRIGÉE ---
+   11. SCROLL INDICATOR
    ========================================================================== */
 .scroll-down-indicator {
     position: fixed;
-    bottom: 30px;
+    bottom: var(--footer-height); 
     left: 50%;
     transform: translateX(-50%);
     z-index: 50;
     color: var(--primary-color);
-    font-size: 2.5rem;
-    opacity: 0.7;
-    animation: bounce 2s infinite;
+    font-size: 2rem;
+    opacity: 0; 
+    animation: pulse-fade 2.5s infinite;
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .home-page .scroll-down-indicator { display: none; }
 .scroll-down-indicator.hidden {
-    opacity: 0;
+    opacity: 0 !important; 
     pointer-events: none;
     transform: translateX(-50%) translateY(20px);
 }
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-    40% { transform: translateX(-50%) translateY(-20px); }
-    60% { transform: translateX(-50%) translateY(-10px); }
+@keyframes pulse-fade {
+    0% { opacity: 0; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.7; transform: translateX(-50%) translateY(-10px); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(0); }
 }
+@media (max-width: 768px) {
+    .scroll-down-indicator {
+        bottom: var(--footer-height-mobile);
+    }
+}
+
 
 /* ==========================================================================
    12. PDF WATERMARK
    ========================================================================== */
 #pdf-watermark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%) rotate(-35deg);
-    font-size: 5vw;
-    font-weight: 900;
-    font-family: var(--font-sans);
-    color: rgba(255, 255, 255, 0.08);
-    text-align: center;
-    text-transform: uppercase;
-    line-height: 1.5;
-    z-index: 1001;
-    pointer-events: none;
-    user-select: none;
+    font-size: 5vw; font-weight: 900; font-family: var(--font-sans);
+    color: rgba(255, 255, 255, 0.08); text-align: center; text-transform: uppercase;
+    line-height: 1.5; z-index: 1001; pointer-events: none; user-select: none;
 }
 
 /* ==========================================================================
    13. NOTIFICATION POP-UP
    ========================================================================== */
 .notification-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(10, 25, 47, 0.7);
-    backdrop-filter: blur(5px);
-    z-index: 2000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(10, 25, 47, 0.7); backdrop-filter: blur(5px);
+    z-index: 2000; display: flex; justify-content: center; align-items: center;
+    opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-.notification-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
+.notification-overlay.visible { opacity: 1; visibility: visible; }
 .notification-box {
-    background-color: var(--light-background-color);
-    padding: 30px 40px;
-    border-radius: 5px;
-    text-align: center;
-    max-width: 450px;
-    width: 90%;
-    border: 1px solid var(--primary-color);
-    box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
+    background-color: var(--light-background-color); padding: 30px 40px;
+    border-radius: 5px; text-align: center; max-width: 450px; width: 90%;
+    border: 1px solid var(--primary-color); box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+    transform: scale(0.9); transition: transform 0.3s ease;
 }
-.notification-overlay.visible .notification-box {
-    transform: scale(1);
-}
-.notification-box .icon {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-.notification-box h3 {
-    color: var(--secondary-color);
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-}
-.notification-box p {
-    color: var(--dark-slate);
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
+.notification-overlay.visible .notification-box { transform: scale(1); }
+.notification-box .icon { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
+.notification-box h3 { color: var(--secondary-color); margin-bottom: 15px; font-size: 1.5rem; }
+.notification-box p { color: var(--dark-slate); line-height: 1.6; margin-bottom: 25px; }
 .notification-box .email-address {
-    background-color: var(--background-color);
-    padding: 10px;
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    color: var(--primary-color);
-    word-break: break-all;
+    background-color: var(--background-color); padding: 10px; border-radius: 4px;
+    font-family: var(--font-mono); color: var(--primary-color); word-break: break-all;
 }
 .notification-box .close-btn {
-    margin-top: 25px;
-    background: none;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-    padding: 10px 25px;
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    cursor: pointer;
-    transition: all 0.3s ease;
+    margin-top: 25px; background: none; border: 1px solid var(--primary-color);
+    color: var(--primary-color); padding: 10px 25px; border-radius: 4px;
+    font-family: var(--font-mono); cursor: pointer; transition: all 0.3s ease;
 }
-.notification-box .close-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--background-color);
-}
+.notification-box .close-btn:hover { background-color: var(--primary-color); color: var(--background-color); }

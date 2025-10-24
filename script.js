@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LOGIQUE COMMUNE À TOUTES LES PAGES ---
 
-    // Initialisation de Particles.js (avec configuration différente pour la page d'accueil)
+    // Initialisation de Particles.js
     const particlesContainer = document.getElementById('particles-js');
     if (particlesContainer) {
         let particleConfig = {
@@ -24,27 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             retina_detect: true
         };
-
-        // Si nous sommes sur la page d'accueil, on active l'interactivité
         if (document.body.classList.contains('home-page')) {
             particleConfig.particles.number.value = 80;
             particleConfig.particles.line_linked.opacity = 0.2;
             particleConfig.particles.opacity.value = 0.4;
             particleConfig.particles.move.speed = 1;
-            particleConfig.interactivity.events = {
-                onhover: { enable: true, mode: 'repulse' },
-                onclick: { enable: true, mode: 'push' },
-                resize: true
-            };
-            particleConfig.interactivity.modes = {
-                repulse: { distance: 100, duration: 0.4 },
-                push: { particles_nb: 4 }
-            };
+            particleConfig.interactivity.events = { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true };
+            particleConfig.interactivity.modes = { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } };
         }
         particlesJS('particles-js', particleConfig);
     }
 
-    // Gestion du menu hamburger pour les pages internes
+    // Gestion du menu hamburger
     const hamburger = document.getElementById('hamburger-menu');
     const mobileNav = document.getElementById('mobile-nav');
     const overlay = document.getElementById('mobile-nav-overlay');
@@ -67,22 +58,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Indicateur de scroll vers le bas pour les pages internes
+    // === SECTION ENTIÈREMENT REVUE POUR UNE FIABILITÉ MAXIMALE ===
     const scrollIndicator = document.querySelector('.scroll-down-indicator');
     if (scrollIndicator) {
-        const toggleScrollIndicator = () => {
-            const scrollTop = window.scrollY;
-            const windowHeight = window.innerHeight;
+        const checkScrollIndicatorVisibility = () => {
             const documentHeight = document.documentElement.scrollHeight;
-            if (documentHeight <= windowHeight || scrollTop + windowHeight >= documentHeight - 5) {
+            const viewportHeight = window.innerHeight;
+            
+            // Si la page n'est pas plus grande que la fenêtre, l'indicateur doit être caché.
+            if (documentHeight <= viewportHeight) {
+                scrollIndicator.classList.add('hidden');
+                return;
+            }
+            
+            // Calcule la position actuelle du bas de la fenêtre.
+            const scrollBottom = window.scrollY + viewportHeight;
+            
+            // Si le bas de la fenêtre a atteint (ou dépassé) le bas de la page, on cache l'indicateur.
+            // On utilise une marge de 1px pour être sûr.
+            if (scrollBottom >= documentHeight - 1) {
                 scrollIndicator.classList.add('hidden');
             } else {
+                // Sinon, sur une page qui peut défiler, on le montre.
                 scrollIndicator.classList.remove('hidden');
             }
         };
-        window.addEventListener('scroll', toggleScrollIndicator);
-        window.addEventListener('resize', toggleScrollIndicator);
-        toggleScrollIndicator();
+
+        // On attache notre fonction aux événements de scroll et de redimensionnement.
+        window.addEventListener('scroll', checkScrollIndicatorVisibility);
+        window.addEventListener('resize', checkScrollIndicatorVisibility);
+
+        // LE POINT CLÉ DE LA CORRECTION :
+        // On attend que TOUTE la page soit chargée (images incluses) avant de faire la première vérification.
+        window.addEventListener('load', () => {
+             setTimeout(checkScrollIndicatorVisibility, 100); // Un petit délai pour être sûr que tout est bien en place
+        });
     }
 
 
@@ -115,14 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(() => {
                             body.classList.remove('loading');
                             preloader.style.display = 'none';
-                            // Initialiser Typed.js seulement après la fin du preloader
                             new Typed('#typed-text', {
                                 strings: ["un Spécialiste IA.", "un Créateur de Modèles.", "un Visionnaire Data."],
-                                typeSpeed: 60,
-                                backSpeed: 30,
-                                loop: true,
-                                smartBackspace: true,
-                                startDelay: 500
+                                typeSpeed: 60, backSpeed: 30, loop: true, smartBackspace: true, startDelay: 500
                             });
                         }, 500);
                     }, 300);
