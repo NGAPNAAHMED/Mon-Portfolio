@@ -11,13 +11,11 @@
 </head>
 <body class="loading home-page">
 
-    <!-- NOUVEAU : Le conteneur des particules est maintenant à la racine pour être toujours en arrière-plan -->
     <div id="particles-js"></div>
 
     <div class="preloader-elements">
         <div class="preloader-header"><h1 class="preloader-title-3d">Bienvenue sur mon Portfolio</h1></div>
         <div class="preloader-footer">
-            <!-- MODIFIÉ : Nouvelle structure pour mettre le pourcentage à l'intérieur -->
             <div class="progress-container">
                 <svg class="progress-ring" width="150" height="150">
                     <circle class="progress-ring__bg" r="65" cx="75" cy="75"/>
@@ -28,7 +26,6 @@
         </div>
     </div>
 
-    <!-- Le reste du contenu de la page reste dans le content-wrapper -->
     <div class="content-wrapper">
         <main class="content-container">
             
@@ -57,55 +54,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const body = document.body;
-            const percentageElement = document.querySelector('.preloader-percentage');
-            const progressCircle = document.getElementById('progress-circle');
-            const radius = progressCircle.r.baseVal.value;
-            const circumference = 2 * Math.PI * radius;
-            progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-            progressCircle.style.strokeDashoffset = circumference;
-
-            // Initialisation des particules dès le début
-            initializeParticles();
-
-            let percent = 0;
-            const interval = setInterval(() => {
-                if (percent < 100) {
-                    percent++;
-                    percentageElement.textContent = percent + '%';
-                    const offset = circumference - percent / 100 * circumference;
-                    progressCircle.style.strokeDashoffset = offset;
-                } else {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        document.querySelector('.preloader-elements').style.opacity = '0';
-                        setTimeout(() => {
-                           body.classList.remove('loading');
-                           document.querySelector('.preloader-elements').style.display = 'none'; // Cache complètement le preloader
-                           initializeMainContent();
-                        }, 500);
-                    }, 300);
-                }
-            }, 45);
-
-            function initializeParticles() {
-                particlesJS('particles-js', { particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: '#64FFDA' }, shape: { type: 'circle' }, opacity: { value: 0.4, random: true }, size: { value: 2, random: true }, line_linked: { enable: true, distance: 150, color: '#64FFDA', opacity: 0.2, width: 1 }, move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false } }, interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } } }, retina_detect: true });
-            }
-
-            function initializeMainContent() {
-                // Les particules sont déjà initialisées, il ne reste que le texte
-                new Typed('#typed-text', { 
-                    strings: ["un Spécialiste IA.", "un Créateur de Modèles.", "un Visionnaire Data."], 
-                    typeSpeed: 60, 
-                    backSpeed: 30, 
-                    loop: true, 
-                    smartBackspace: true, 
-                    startDelay: 500 
-                });
-            }
-        });
-    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
