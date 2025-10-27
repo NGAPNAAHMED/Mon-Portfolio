@@ -58,40 +58,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === SECTION ENTIÈREMENT REVUE POUR UNE FIABILITÉ MAXIMALE ===
+    // === LOGIQUE DE L'INDICATEUR DE SCROLL ENTIÈREMENT REVUE POUR ÊTRE INFAILLIBLE ===
     const scrollIndicator = document.querySelector('.scroll-down-indicator');
     if (scrollIndicator) {
         const checkScrollIndicatorVisibility = () => {
-            const documentHeight = document.documentElement.scrollHeight;
-            const viewportHeight = window.innerHeight;
-            
-            // Si la page n'est pas plus grande que la fenêtre, l'indicateur doit être caché.
-            if (documentHeight <= viewportHeight) {
+            const doc = document.documentElement;
+            const scrollHeight = doc.scrollHeight;
+            const clientHeight = doc.clientHeight;
+
+            // Condition n°1 (La plus importante) : La page n'est PAS scrollable.
+            // Si la hauteur totale du contenu est inférieure ou égale à la hauteur de la fenêtre,
+            // l'indicateur ne doit JAMAIS apparaître.
+            // On ajoute une tolérance de 1px pour les calculs parfois imprécis des navigateurs.
+            if (scrollHeight <= clientHeight + 1) {
                 scrollIndicator.classList.add('hidden');
-                return;
+                return; // On arrête la fonction ici.
             }
-            
-            // Calcule la position actuelle du bas de la fenêtre.
-            const scrollBottom = window.scrollY + viewportHeight;
-            
-            // Si le bas de la fenêtre a atteint (ou dépassé) le bas de la page, on cache l'indicateur.
-            // On utilise une marge de 1px pour être sûr.
-            if (scrollBottom >= documentHeight - 1) {
+
+            // Condition n°2 : L'utilisateur a atteint le bas de la page.
+            // Si le haut de la vue (scrollY) + la hauteur de la fenêtre est égal (ou supérieur)
+            // à la hauteur totale du document, on masque l'indicateur.
+            const isAtBottom = Math.ceil(window.scrollY + clientHeight) >= scrollHeight;
+            if (isAtBottom) {
                 scrollIndicator.classList.add('hidden');
             } else {
-                // Sinon, sur une page qui peut défiler, on le montre.
+                // Si aucune des conditions de masquage n'est vraie, alors on doit voir l'indicateur.
                 scrollIndicator.classList.remove('hidden');
             }
         };
 
-        // On attache notre fonction aux événements de scroll et de redimensionnement.
+        // Écouteurs d'événements pour les actions de l'utilisateur
         window.addEventListener('scroll', checkScrollIndicatorVisibility);
         window.addEventListener('resize', checkScrollIndicatorVisibility);
 
-        // LE POINT CLÉ DE LA CORRECTION :
-        // On attend que TOUTE la page soit chargée (images incluses) avant de faire la première vérification.
+        // POINT CRUCIAL DE LA CORRECTION :
+        // On attend que TOUT (images, polices, etc.) soit chargé, puis on laisse un court délai
+        // pour que les animations (AOS) et le rendu final se stabilisent avant de faire la
+        // toute première vérification. C'est ce qui garantit que la hauteur est correcte.
         window.addEventListener('load', () => {
-             setTimeout(checkScrollIndicatorVisibility, 100); // Un petit délai pour être sûr que tout est bien en place
+            setTimeout(checkScrollIndicatorVisibility, 300); // 300ms est un délai très sûr.
         });
     }
 
