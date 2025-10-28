@@ -404,4 +404,14 @@ main#main-content {
 .notification-overlay.visible .notification-box { transform: scale(1); }
 .notification-box .icon { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
 .notification-box h3 { color: var(--secondary-color); margin-bottom: 15px; font-size: 1.5rem; }
-.notification-box p { color: var
+.notification-box p { color: var(--dark-slate); line-height: 1.6; margin-bottom: 25px; }
+.notification-box .email-address {
+    background-color: var(--background-color); padding: 10px; border-radius: 4px;
+    font-family: var(--font-mono); color: var(--primary-color); word-break: break-all;
+}
+.notification-box .close-btn {
+    margin-top: 25px; background: none; border: 1px solid var(--primary-color);
+    color: var(--primary-color); padding: 10px 25px; border-radius: 4px;
+    font-family: var(--font-mono); cursor: pointer; transition: all 0.3s ease;
+}
+.notification-box .close-btn:hover { background-color: var(--primary-color); color: var(--background-color); }

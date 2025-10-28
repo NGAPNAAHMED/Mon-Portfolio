@@ -58,31 +58,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === INDICATEUR DE SCROLL (ARCHITECTURE DÉFINITIVE) ===
+    // === INDICATEUR DE SCROLL (MÉTHODE SIMPLE ET FIABLE) ===
     const scrollIndicator = document.querySelector('.scroll-down-indicator');
     if (scrollIndicator) {
-        const handleScrollIndicator = () => {
+        const checkIndicator = () => {
             const doc = document.documentElement;
+            // Condition 1 : La page est-elle physiquement plus grande que la fenêtre ?
             const isScrollable = doc.scrollHeight > doc.clientHeight;
-            // On considère être "en bas" avec une marge de 10px
-            const isAtBottom = (window.innerHeight + window.scrollY) >= doc.scrollHeight - 10;
+            // Condition 2 : N'est-on PAS tout en bas de la page ? (avec 5px de marge)
+            const isNotAtBottom = (window.innerHeight + window.scrollY) < doc.scrollHeight - 5;
 
-            if (isScrollable && !isAtBottom) {
-                scrollIndicator.classList.add('is-visible');
+            // Si la page est scrollable ET qu'on n'est pas tout en bas, on active l'indicateur.
+            if (isScrollable && isNotAtBottom) {
+                scrollIndicator.classList.add('is-active');
             } else {
-                scrollIndicator.classList.remove('is-visible');
+                // Sinon, on le désactive.
+                scrollIndicator.classList.remove('is-active');
             }
         };
 
-        // Écouteurs pour les actions de l'utilisateur
-        window.addEventListener('scroll', handleScrollIndicator);
-        window.addEventListener('resize', handleScrollIndicator);
+        // On attache la vérification aux événements de scroll et de redimensionnement.
+        window.addEventListener('scroll', checkIndicator);
+        window.addEventListener('resize', checkIndicator);
 
-        // Vérification initiale après le chargement complet de la page.
-        // On utilise un délai plus long (500ms) pour être absolument certain
-        // que toutes les animations AOS et le rendu sont terminés.
+        // C'EST LA PARTIE LA PLUS IMPORTANTE :
+        // On attend que TOUT soit chargé (événement 'load'), PUIS on attend encore 500ms
+        // pour être sûr que les animations AOS sont finies, avant de faire la première vérification.
         window.addEventListener('load', () => {
-            setTimeout(handleScrollIndicator, 500);
+            setTimeout(checkIndicator, 500);
         });
     }
 
