@@ -58,45 +58,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === LOGIQUE DE L'INDICATEUR DE SCROLL ENTIÈREMENT REVUE POUR ÊTRE INFAILLIBLE ===
+    // === INDICATEUR DE SCROLL (ARCHITECTURE DÉFINITIVE) ===
     const scrollIndicator = document.querySelector('.scroll-down-indicator');
     if (scrollIndicator) {
-        const checkScrollIndicatorVisibility = () => {
+        const handleScrollIndicator = () => {
             const doc = document.documentElement;
-            const scrollHeight = doc.scrollHeight;
-            const clientHeight = doc.clientHeight;
+            const isScrollable = doc.scrollHeight > doc.clientHeight;
+            // On considère être "en bas" avec une marge de 10px
+            const isAtBottom = (window.innerHeight + window.scrollY) >= doc.scrollHeight - 10;
 
-            // Condition n°1 (La plus importante) : La page n'est PAS scrollable.
-            // Si la hauteur totale du contenu est inférieure ou égale à la hauteur de la fenêtre,
-            // l'indicateur ne doit JAMAIS apparaître.
-            // On ajoute une tolérance de 1px pour les calculs parfois imprécis des navigateurs.
-            if (scrollHeight <= clientHeight + 1) {
-                scrollIndicator.classList.add('hidden');
-                return; // On arrête la fonction ici.
-            }
-
-            // Condition n°2 : L'utilisateur a atteint le bas de la page.
-            // Si le haut de la vue (scrollY) + la hauteur de la fenêtre est égal (ou supérieur)
-            // à la hauteur totale du document, on masque l'indicateur.
-            const isAtBottom = Math.ceil(window.scrollY + clientHeight) >= scrollHeight;
-            if (isAtBottom) {
-                scrollIndicator.classList.add('hidden');
+            if (isScrollable && !isAtBottom) {
+                scrollIndicator.classList.add('is-visible');
             } else {
-                // Si aucune des conditions de masquage n'est vraie, alors on doit voir l'indicateur.
-                scrollIndicator.classList.remove('hidden');
+                scrollIndicator.classList.remove('is-visible');
             }
         };
 
-        // Écouteurs d'événements pour les actions de l'utilisateur
-        window.addEventListener('scroll', checkScrollIndicatorVisibility);
-        window.addEventListener('resize', checkScrollIndicatorVisibility);
+        // Écouteurs pour les actions de l'utilisateur
+        window.addEventListener('scroll', handleScrollIndicator);
+        window.addEventListener('resize', handleScrollIndicator);
 
-        // POINT CRUCIAL DE LA CORRECTION :
-        // On attend que TOUT (images, polices, etc.) soit chargé, puis on laisse un court délai
-        // pour que les animations (AOS) et le rendu final se stabilisent avant de faire la
-        // toute première vérification. C'est ce qui garantit que la hauteur est correcte.
+        // Vérification initiale après le chargement complet de la page.
+        // On utilise un délai plus long (500ms) pour être absolument certain
+        // que toutes les animations AOS et le rendu sont terminés.
         window.addEventListener('load', () => {
-            setTimeout(checkScrollIndicatorVisibility, 300); // 300ms est un délai très sûr.
+            setTimeout(handleScrollIndicator, 500);
         });
     }
 

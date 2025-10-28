@@ -19,7 +19,6 @@ body {
     font-family: var(--font-sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
 
-/* IMPORTANT : Le padding haut/bas assure que le contenu ne passe jamais SOUS le header/footer fixes */
 main#main-content {
     padding-top: 150px;
     padding-bottom: var(--footer-height); 
@@ -76,7 +75,6 @@ main#main-content {
 #main-header {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
     background-color: rgba(10, 25, 47, 0.85); backdrop-filter: blur(10px); padding: 15px 50px; 
-    transition: top 0.3s;
 }
 .header-container {
     display: flex; justify-content: space-between; align-items: center; width: 100%;
@@ -328,34 +326,50 @@ main#main-content {
 }
 
 /* ==========================================================================
-   11. SCROLL INDICATOR
+   11. SCROLL INDICATOR (MÉTHODE SIMPLE ET FIABLE)
    ========================================================================== */
+@keyframes simple-pulse {
+  0% {
+    opacity: 0.8;
+    transform: translateY(0) translateX(-50%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) translateX(-50%);
+  }
+  100% {
+    opacity: 0.8;
+    transform: translateY(0) translateX(-50%);
+  }
+}
+
 .scroll-down-indicator {
+    /* Étape 1 : Totalement caché par défaut. C'est la sécurité. */
+    display: none;
+    
     position: fixed;
-    bottom: var(--footer-height); 
+    bottom: 30px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* Assure un centrage parfait */
     z-index: 50;
     color: var(--primary-color);
     font-size: 2rem;
-    opacity: 0; 
-    animation: pulse-fade 2.5s infinite;
-    transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.home-page .scroll-down-indicator { display: none; }
-.scroll-down-indicator.hidden {
-    opacity: 0 !important; 
-    pointer-events: none;
-    transform: translateX(-50%) translateY(20px);
+
+/* Étape 2 : Le JS ajoute cette classe. Elle fait tout. */
+.scroll-down-indicator.is-active {
+    display: block; /* Le rend visible */
+    animation: simple-pulse 2.5s infinite; /* Démarre l'animation */
 }
-@keyframes pulse-fade {
-    0% { opacity: 0; transform: translateX(-50%) translateY(0); }
-    50% { opacity: 0.7; transform: translateX(-50%) translateY(-10px); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(0); }
+
+/* On le cache sur la page d'accueil car inutile */
+.home-page .scroll-down-indicator {
+    display: none !important;
 }
+
 @media (max-width: 768px) {
     .scroll-down-indicator {
-        bottom: var(--footer-height-mobile);
+        bottom: 15px;
     }
 }
 
@@ -390,14 +404,4 @@ main#main-content {
 .notification-overlay.visible .notification-box { transform: scale(1); }
 .notification-box .icon { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
 .notification-box h3 { color: var(--secondary-color); margin-bottom: 15px; font-size: 1.5rem; }
-.notification-box p { color: var(--dark-slate); line-height: 1.6; margin-bottom: 25px; }
-.notification-box .email-address {
-    background-color: var(--background-color); padding: 10px; border-radius: 4px;
-    font-family: var(--font-mono); color: var(--primary-color); word-break: break-all;
-}
-.notification-box .close-btn {
-    margin-top: 25px; background: none; border: 1px solid var(--primary-color);
-    color: var(--primary-color); padding: 10px 25px; border-radius: 4px;
-    font-family: var(--font-mono); cursor: pointer; transition: all 0.3s ease;
-}
-.notification-box .close-btn:hover { background-color: var(--primary-color); color: var(--background-color); }
+.notification-box p { color: var
