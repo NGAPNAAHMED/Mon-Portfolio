@@ -58,34 +58,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === INDICATEUR DE SCROLL (MÉTHODE SIMPLE ET FIABLE) ===
+    // =========================================================================
+    // CORRECTION : INDICATEUR DE SCROLL (LOGIQUE FINALISÉE ET ROBUSTE)
+    // =========================================================================
     const scrollIndicator = document.querySelector('.scroll-down-indicator');
     if (scrollIndicator) {
         const checkIndicator = () => {
-            const doc = document.documentElement;
-            // Condition 1 : La page est-elle physiquement plus grande que la fenêtre ?
-            const isScrollable = doc.scrollHeight > doc.clientHeight;
-            // Condition 2 : N'est-on PAS tout en bas de la page ? (avec 5px de marge)
-            const isNotAtBottom = (window.innerHeight + window.scrollY) < doc.scrollHeight - 5;
+            // Utiliser les dimensions de la fenêtre et la hauteur totale du document.
+            const pageHeight = document.documentElement.scrollHeight;
+            const viewportHeight = window.innerHeight;
+            const scrollPosition = window.scrollY;
 
-            // Si la page est scrollable ET qu'on n'est pas tout en bas, on active l'indicateur.
+            // Condition 1 : La page est-elle plus haute que la fenêtre ?
+            // Une marge de 1 pixel évite les faux positifs sur certains navigateurs/zooms.
+            const isScrollable = pageHeight > viewportHeight + 1;
+
+            // Condition 2 : N'est-on pas tout en bas de la page ?
+            // Marge de 1 pixel pour la même raison.
+            const isNotAtBottom = scrollPosition < pageHeight - viewportHeight - 1;
+
+            // Afficher l'indicateur si la page est déroulable ET qu'on n'est pas en bas.
             if (isScrollable && isNotAtBottom) {
                 scrollIndicator.classList.add('is-active');
             } else {
-                // Sinon, on le désactive.
                 scrollIndicator.classList.remove('is-active');
             }
         };
 
-        // On attache la vérification aux événements de scroll et de redimensionnement.
-        window.addEventListener('scroll', checkIndicator);
-        window.addEventListener('resize', checkIndicator);
+        // --- Gestion des Événements ---
 
-        // C'EST LA PARTIE LA PLUS IMPORTANTE :
-        // On attend que TOUT soit chargé (événement 'load'), PUIS on attend encore 500ms
-        // pour être sûr que les animations AOS sont finies, avant de faire la première vérification.
+        // Exécuter la vérification lors du défilement et du redimensionnement.
+        window.addEventListener('scroll', checkIndicator, { passive: true });
+        window.addEventListener('resize', checkIndicator, { passive: true });
+
+        // Exécuter la vérification après le chargement complet de la page.
+        // C'est le point le plus critique. Nous effectuons plusieurs vérifications
+        // pour nous assurer de prendre en compte les animations (AOS) et le rendu final du DOM.
         window.addEventListener('load', () => {
+            // Vérification immédiate
+            checkIndicator();
+            // Vérifications différées pour contrer les animations et le reflow du layout.
             setTimeout(checkIndicator, 500);
+            setTimeout(checkIndicator, 1500); // Une dernière vérification pour être absolument sûr.
         });
     }
 
